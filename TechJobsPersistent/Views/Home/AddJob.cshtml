@@ -1,12 +1,46 @@
-﻿<h1>Add a Job</h1>
+﻿@model TechJobsPersistent.ViewModels.AddJobViewModel;
+<h1>Add a Job</h1>
 
-<form asp-controller="Home" asp-action="ProcessAddJobForm" method="post">
+<form asp-controller="Home" asp-action="AddJob" method="post">
     <div class="form-group">
-        <label>Name</label>
-        <input class="form-control" />
-        <span></span>
+        <label asp-for="JobName">Name</label>
+        <input asp-for="JobName" class="form-control" />
+        <span asp-validation-for="JobName"></span>
     </div>
+    <div class="form-group">
+        <label for="EmployerId">Employer</label>
+        @if (Model.Employers == null || Model.Employers.Count == 0)
+        {
+            <select asp-for="EmployerId">
+                <option value=0>None</option>
+            </select>
+        }
+        else
+        {
+            <select asp-for="EmployerId" asp-items="@Model.Employers">
+                <option value=0>Choose one</option>
+            </select>
+        }
+        @* <select asp-for="EmployerId" asp-items="@Model.Employers"></select>*@
+        <span asp-validation-for="EmployerId"></span>
+        <a asp-controller="Employer" asp-action="Add">Add new Employer</a>
+    </div>
+    <div class="form-group">
+        <label>Skills</label>
+        @if (Model.Skills == null)
+        {
+            <p>No skills yet!</p>
+        }
+        else
+        {
+            foreach (Skill skill in Model.Skills)
+            {
+            <input type="checkbox" name="selectedSkills" value="@skill.Id"> @skill.Name
+            }
 
+        }
+        <a asp-controller="Skill" asp-action="Add">Add new Skill</a>
+    </div>
     <input type="submit" value="Add Job" />
 </form>
 

@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>TechJobsPersistent</AssemblyName>
   </PropertyGroup>
 
 
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\Employer\" />
     <Folder Include="Data\" />
     <Folder Include="Views\List\" />
@@ -15,6 +15,10 @@
     <Folder Include="Views\Skill\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
   </ItemGroup>
 </Project>

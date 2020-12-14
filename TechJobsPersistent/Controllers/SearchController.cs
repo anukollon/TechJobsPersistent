@@ -52,7 +52,7 @@ namespace TechJobsPersistent.Controllers
             }
             else
             {
-                if (searchType == "employer")
+                if (searchType == "employer" || searchType == "all")
                 {
                     jobs = context.Jobs
                         .Include(j => j.Employer)
@@ -71,13 +71,12 @@ namespace TechJobsPersistent.Controllers
                     }
 
                 }
-                else if (searchType == "skill")
+                if (searchType == "skill" || searchType == "all")
                 {
                     List<JobSkill> jobSkills = context.JobSkills
                         .Where(j => j.Skill.Name == searchTerm)
                         .Include(j => j.Job)
                         .ToList();
-
                     foreach (var job in jobSkills)
                     {
                         Job foundJob = context.Jobs
@@ -98,7 +97,7 @@ namespace TechJobsPersistent.Controllers
             ViewBag.columns = ListController.ColumnChoices;
             ViewBag.title = "Jobs with " + ListController.ColumnChoices[searchType] + ": " + searchTerm;
             ViewBag.jobs = displayJobs;
-
+            ViewBag.checkedValue = searchType;
             return View("Index");
         }
     }
