@@ -35,7 +35,7 @@ namespace TechJobsPersistent.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index()    
         {
             ViewBag.columns = ColumnChoices;
             ViewBag.tablechoices = TableChoices;
